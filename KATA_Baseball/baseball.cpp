@@ -6,6 +6,16 @@ using namespace std;
 class Baseball {
 public:
 	bool guess(const string& guessNumber) {
+		checkValidity(guessNumber);
+
+		return true;
+	}
+
+private:
+	const int LEN_ANSWER = 3;
+	string answer;
+
+	void checkValidity(const std::string& guessNumber){
 		if (guessNumber.size() != LEN_ANSWER) {
 			throw length_error("Lengh error");
 		}
@@ -15,16 +25,14 @@ public:
 				throw invalid_argument("Must be numbers");
 			}
 		}
-		if (guessNumber[0] == guessNumber[1]
-			|| guessNumber[0] == guessNumber[2]
-			|| guessNumber[1] == guessNumber[2]) {
+		if (isDuplicatedNumber(guessNumber)) {
 			throw invalid_argument("Gussed String has Duplicated numbers");
 		}
-
-		return true;
 	}
-private:
-	const int LEN_ANSWER = 3;
-	string answer;
 
+	bool isDuplicatedNumber(const std::string& guessNumber) {
+		return guessNumber[0] == guessNumber[1]
+			|| guessNumber[0] == guessNumber[2]
+			|| guessNumber[1] == guessNumber[2];
+	}
 };
