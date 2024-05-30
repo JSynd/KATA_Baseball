@@ -15,32 +15,48 @@ public:
 
 	explicit Baseball(const string& answer) : answer(answer) {}
 	Result guess(const string& guessNumber) {
-		checkValidity(guessNumber);
-		if (answer == guessNumber) return { true, 3, 0 };
-		return { false, 2, 0 };
+		setGuessValue(guessNumber);
+		
+		checkValidity();
+
+		int strikeCnt = getStrikeCount();
+		return { strikeCnt == LEN_ANSWER, strikeCnt , 0 };
 	}
 
 private:
 	string answer;
+	string guessValue;
 
-	void checkValidity(const std::string& guessNumber){
-		if (guessNumber.size() != LEN_ANSWER) {
+	void setGuessValue(const string& guessNumber) {
+		guessValue = guessNumber;
+	}
+
+	void checkValidity(){
+		if (guessValue.size() != LEN_ANSWER) {
 			throw length_error("Lengh error");
 		}
 
-		for (char ch : guessNumber) {
+		for (char ch : guessValue) {
 			if (ch < '0' || ch > '9') {
 				throw invalid_argument("Must be numbers");
 			}
 		}
-		if (isDuplicatedNumber(guessNumber)) {
+		if (isDuplicatedNumber()) {
 			throw invalid_argument("Gussed String has Duplicated numbers");
 		}
 	}
 
-	bool isDuplicatedNumber(const std::string& guessNumber) {
-		return guessNumber[0] == guessNumber[1]
-			|| guessNumber[0] == guessNumber[2]
-			|| guessNumber[1] == guessNumber[2];
+	bool isDuplicatedNumber() {
+		return guessValue[0] == guessValue[1]
+			|| guessValue[0] == guessValue[2]
+			|| guessValue[1] == guessValue[2];
+	}
+
+	int getStrikeCount() {
+		int num_strikes = 0;
+		for (int i = 0; i < answer.size(); i++) {
+			if (answer[i] == guessValue[i]) num_strikes++;
+		}
+		return num_strikes;
 	}
 };
