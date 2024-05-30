@@ -15,7 +15,7 @@ public:
 	Result guess(const string& guessNumber) {
 		checkValidity(guessNumber);
 		if (answer == guessNumber) return { true, 3, 0 };
-		return { false, 0, 0 };
+		return { false, 2, 0 };
 	}
 
 private:
