@@ -27,3 +27,7 @@ TEST_F(BaseballFixture, Case_Solved) {
 TEST_F(BaseballFixture, Case_2Strike_0Ball) {
 	checkResult("124", 2, 0);
 }
+
+TEST_F(BaseballFixture, Case_0Strike_2Ball) {
+	checkResult("512", 0, 2);
+}

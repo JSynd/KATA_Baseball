@@ -20,6 +20,7 @@ public:
 		checkValidity();
 
 		int strikeCnt = getStrikeCount();
+		if (strikeCnt == 0) return { false, 0, 2 };
 		return { strikeCnt == LEN_ANSWER, strikeCnt , 0 };
 	}
 
