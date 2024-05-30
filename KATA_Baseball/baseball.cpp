@@ -3,12 +3,18 @@
 
 using namespace std;
 
+struct Result {
+	bool solved;
+	int strikes;
+	int balls;
+};
+
 class Baseball {
 public:
-	bool guess(const string& guessNumber) {
+	explicit Baseball(const string& answer) : answer(answer) {}
+	Result guess(const string& guessNumber) {
 		checkValidity(guessNumber);
-
-		return true;
+		return { true, 3, 0 };
 	}
 
 private:
