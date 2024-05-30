@@ -14,7 +14,8 @@ public:
 	explicit Baseball(const string& answer) : answer(answer) {}
 	Result guess(const string& guessNumber) {
 		checkValidity(guessNumber);
-		return { true, 3, 0 };
+		if (answer == guessNumber) return { true, 3, 0 };
+		return { false, 0, 0 };
 	}
 
 private:
