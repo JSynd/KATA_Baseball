@@ -11,6 +11,8 @@ struct Result {
 
 class Baseball {
 public:
+	const int LEN_ANSWER = 3;
+
 	explicit Baseball(const string& answer) : answer(answer) {}
 	Result guess(const string& guessNumber) {
 		checkValidity(guessNumber);
@@ -19,7 +21,6 @@ public:
 	}
 
 private:
-	const int LEN_ANSWER = 3;
 	string answer;
 
 	void checkValidity(const std::string& guessNumber){

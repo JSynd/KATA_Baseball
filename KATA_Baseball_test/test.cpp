@@ -8,20 +8,22 @@ TEST(BaseballGame, ThrowExeptionCases) {
 	EXPECT_THROW(game.guess(string("121")), invalid_argument);
 }
 
-TEST(BaseballGame, CorrectCases) {
+class BaseballFixture : public testing::Test {
+public:
 	Baseball game{ "123" };
-	Result result = game.guess("123");
+	void checkResult(string input, int num_strike, int num_ball) {
+		Result ret = game.guess(input);
+		if (num_strike == game.LEN_ANSWER) EXPECT_TRUE(ret.solved);
+		else EXPECT_FALSE(ret.solved);
+		EXPECT_EQ(num_strike, ret.strikes);
+		EXPECT_EQ(num_ball, ret.balls);
+	}
+};
 
-	EXPECT_TRUE(result.solved);
-	EXPECT_EQ(3, result.strikes);
-	EXPECT_EQ(0, result.balls);
+TEST_F(BaseballFixture, Case_Solved) {
+	checkResult("123", 3, 0);
 }
 
-TEST(BaseballGame, Case_2Strike_0Ball) {
-	Baseball game{ "123" };
-	Result result = game.guess("124");
-
-	EXPECT_FALSE(result.solved);
-	EXPECT_EQ(2, result.strikes);
-	EXPECT_EQ(0, result.balls);
+TEST_F(BaseballFixture, Case_2Strike_0Ball) {
+	checkResult("124", 2, 0);
 }
