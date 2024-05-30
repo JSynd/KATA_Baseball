@@ -1,12 +1,8 @@
 #include "pch.h"
 #include "../KATA_Baseball/Baseball.cpp"
 
-TEST(BaseballGame, ThrowExeptionWhenInputLengthNotMatched) {
+TEST(BaseballGame, ThrowExeptionCases) {
 	Baseball game;
 	EXPECT_THROW(game.guess(string("12")), length_error);
-}
-
-TEST(BaseballGame, ThrowExeptionWhenInputLenthNotMatched) {
-	Baseball game;
-	EXPECT_THROW(game.guess(string("12")), length_error);
+	EXPECT_THROW(game.guess(string("12s")), invalid_argument);
 }

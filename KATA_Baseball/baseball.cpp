@@ -5,9 +5,15 @@ using namespace std;
 
 class Baseball {
 public:
-	bool guess(const string& guess_str) {
-		if (guess_str.size() != LEN_ANSWER) {
+	bool guess(const string& guessNumber) {
+		if (guessNumber.size() != LEN_ANSWER) {
 			throw length_error("Lengh error");
+		}
+
+		for (char ch : guessNumber) {
+			if (ch < '0' || ch > '9') {
+				throw invalid_argument("Must be numbers");
+			}
 		}
 
 		return true;
